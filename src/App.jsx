@@ -85,23 +85,24 @@ function App() {
               onInput={(event) => setInputValue(event.target.value)}
               {...register("password", {
                 required: "Password required.",
-                minLength: {
-                  value: 10,
-                  message: "Must contain more than 10 characters.",
-                },
                 validate: (value) => {
-                  if (value.length < 10) {
-                    return "Must contain 10 or more characters"
+                  if (
+                    value.length < 10 ||
+                    !value.match(/[a-z]/) ||
+                    !value.match(/[A-Z]/) ||
+                    !value.match(/[0-9]/)
+                  ) {
+                    return "⚠️ Please enter a valid password(Must be 10 or more characters, must contain at least one number and at least one uppercase alphabet)."
                   }
-                  if (!value.match(/[a-z]/)) {
-                    return "Must contain one lowercase letter."
-                  }
-                  if (!value.match(/[A-Z]/)) {
-                    return "Must contain one uppercase letter."
-                  }
-                  if (!value.match(/[0-9]/)) {
-                    return "Must contain one number."
-                  }
+                  // if () {
+                  //   return "Must contain one lowercase letter."
+                  // }
+                  // if () {
+                  //   return "Must contain one uppercase letter."
+                  // }
+                  // if () {
+                  //   return "Must contain one number."
+                  // }
                 },
               })}
               error={!!errors?.password}
